@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday, My Love 🌹</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Marcellus&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-phase="1">
+
+<div class="aura"></div>
+<div class="vignette"></div>
+<div class="grain"></div>
+<canvas id="heartsCanvas"></canvas>
+<canvas id="confettiCanvas"></canvas>
+
+<div class="progress" id="progressDots">
+  <span class="seg" data-i="1"></span><span class="stud active" data-i="1"></span>
+  <span class="seg" data-i="2"></span><span class="stud" data-i="2"></span>
+  <span class="seg" data-i="3"></span><span class="stud" data-i="3"></span>
+  <span class="seg" data-i="4"></span><span class="stud" data-i="4"></span>
+  <span class="seg" data-i="5"></span><span class="stud" data-i="5"></span>
+  <span class="seg" data-i="6"></span><span class="stud" data-i="6"></span>
+  <span class="seg" data-i="7"></span><span class="stud" data-i="7"></span>
+  <span class="seg" data-i="8"></span><span class="stud" data-i="8"></span>
+</div>
+
+<button class="music-btn" id="musicBtn" aria-label="Toggle music" title="Toggle music">🔇</button>
+<!--
+  PLACEHOLDER: add your song.
+  Replace the empty src below with a hosted royalty-free mp3 URL,
+  or a base64 data URI of your own file, e.g. src="data:audio/mp3;base64,...."
+-->
+<audio id="bgMusic" loop preload="none">
+  <source src="songs/kammani-ee-premalekha-kanmani-anbodu-kaadhalanyeto-vellipoyindi-manasu-cover-son_KXBacnxe.mp3" type="audio/mpeg">
+</audio>
+
+<div class="stage">
+
+  <!-- ============ PHASE 1 : LOVE METER ============ -->
+  <section class="phase visible" id="phase1">
+    <div class="glass">
+      <p class="eyebrow">A question, Before Anything Else!</p>
+      <h1>How much do you love me? Nuvvu cheppaka poina telusko anuko</h1>
+      <div class="flourish" aria-hidden="true">
+        <svg width="120" height="14" viewBox="0 0 120 14"><line x1="0" y1="7" x2="48" y2="7" stroke="currentColor" stroke-width="1"/><rect x="54" y="3" width="8" height="8" transform="rotate(45 58 7)" fill="currentColor"/><line x1="72" y1="7" x2="120" y2="7" stroke="currentColor" stroke-width="1"/></svg>
+      </div>
+      <div class="meter-reading"><span id="meterValue">0</span>%</div>
+      <div class="meter-msg" id="meterMsg">go on, be honest...</div>
+      <input type="range" id="loveSlider" min="0" max="100" value="0" aria-label="Love meter">
+      <button class="tap-continue" id="toPhase2"><span>tap to continue</span><span class="chev">›</span></button>
+    </div>
+  </section>
+
+  <!-- ============ PHASE 2 : BALLOON POP ============ -->
+  <section class="phase" id="phase2">
+    <div class="glass">
+      <p class="eyebrow">A gift for to my Queen</p>
+      <h2>Pop a little joy 🎈</h2>
+      <div class="flourish" aria-hidden="true">
+        <svg width="120" height="14" viewBox="0 0 120 14"><line x1="0" y1="7" x2="48" y2="7" stroke="currentColor" stroke-width="1"/><rect x="54" y="3" width="8" height="8" transform="rotate(45 58 7)" fill="currentColor"/><line x1="72" y1="7" x2="120" y2="7" stroke="currentColor" stroke-width="1"/></svg>
+      </div>
+      <p>Pop one, and let a little joy spill into the air.</p>
+
+      <div class="balloon-field" id="balloonField" aria-live="polite"></div>
+
+      <div class="balloon-caption" id="balloonCaption"></div>
+      <div class="cake-hint" id="balloonHint">6 balloons left to pop</div>
+      <button class="tap-continue" id="toPhase3"><span>tap to continue</span><span class="chev">›</span></button>
+    </div>
+  </section>
+
+  <!-- ============ PHASE 3 : CAKE ============ -->
+  <section class="phase" id="phase3">
+    <div class="glass">
+      <p class="eyebrow">A gift for to my Queen</p>
+      <h2>Make a wish 🎂</h2>
+      <div class="flourish" aria-hidden="true">
+        <svg width="120" height="14" viewBox="0 0 120 14"><line x1="0" y1="7" x2="48" y2="7" stroke="currentColor" stroke-width="1"/><rect x="54" y="3" width="8" height="8" transform="rotate(45 58 7)" fill="currentColor"/><line x1="72" y1="7" x2="120" y2="7" stroke="currentColor" stroke-width="1"/></svg>
+      </div>
+      <p>Blow gently toward the microphone, or tap each flame, and send your wish drifting into the night.</p>
+      <button class="mic-btn" id="enableMic" type="button">Enable microphone</button>
+      <div class="mic-status" id="micStatus" aria-live="polite">Microphone is off</div>
+
+      <div class="cake-wrap">
+        <div class="candles" id="candleRow">
+          <div class="candle" data-c="1"><span class="flame"></span><span class="smoke"></span></div>
+          <div class="candle" data-c="2"><span class="flame"></span><span class="smoke"></span></div>
+          <div class="candle" data-c="3"><span class="flame"></span><span class="smoke"></span></div>
+        </div>
+        <div class="cake">
+          <div class="tier top"><div class="drip"></div></div>
+          <div class="tier bottom"><div class="drip"></div></div>
+          <div class="plate"></div>
+        </div>
+      </div>
+
+      <div class="cake-hint" id="cakeHint">3 candles left to blow out</div>
+      <div class="birthday-banner" id="bdayBanner">🎉 Happy Birthday, Na Bangaram! 🎉</div>
+      <button class="tap-continue" id="toPhase4"><span>tap to continue</span><span class="chev">›</span></button>
+    </div>
+  </section>
+
+  <!-- ============ PHASE 4 : MEMORY MATCH ============ -->
+  <section class="phase" id="phase4">
+    <div class="glass">
+      <p class="eyebrow">A gift for to my Queen</p>
+      <h2>Match & win my heart 💕</h2>
+      <div class="flourish" aria-hidden="true">
+        <svg width="120" height="14" viewBox="0 0 120 14"><line x1="0" y1="7" x2="48" y2="7" stroke="currentColor" stroke-width="1"/><rect x="54" y="3" width="8" height="8" transform="rotate(45 58 7)" fill="currentColor"/><line x1="72" y1="7" x2="120" y2="7" stroke="currentColor" stroke-width="1"/></svg>
+      </div>
+      <p>Flip two at a time — every match is a little proof we belong together.</p>
+
+      <div class="match-grid" id="matchGrid"></div>
+
+      <div class="cake-hint" id="matchHint">0 of 6 pairs found</div>
+      <div class="star-complete" id="matchComplete">you found them all — just like you found me 💕</div>
+      <button class="tap-continue" id="toPhase5"><span>tap to continue</span><span class="chev">›</span></button>
+    </div>
+  </section>
+
+  <!-- ============ PHASE 5 : CONSTELLATION OF WISHES ============ -->
+  <section class="phase" id="phase5">
+    <div class="glass night">
+      <p class="eyebrow">A gift for to my Queen</p>
+      <h2>Light our constellation</h2>
+      <div class="flourish" aria-hidden="true">
+        <svg width="120" height="4" viewBox="0 0 120 14"><line x1="0" y1="7" x2="48" y2="7" stroke="currentColor" stroke-width="1"/><rect x="54" y="3" width="8" height="8" transform="rotate(45 58 7)" fill="currentColor"/><line x1="72" y1="7" x2="120" y2="7" stroke="currentColor" stroke-width="1"/></svg>
+      </div>
+      <p>Tap the stars, in any order, and watch our story take shape above us.</p>
+      <canvas id="starCanvas" width="300" height="240" aria-label="Tap the stars to reveal a shape"></canvas>
+      <div class="star-hint" id="starHint">14 stars left to light</div>
+      <div class="star-complete" id="starComplete">it was always going to be a heart ✨</div>
+      <button class="tap-continue" id="toPhase6"><span>tap to continue</span><span class="chev">›</span></button>
+    </div>
+  </section>
+
+  <!-- ============ PHASE 6 : BOUQUET + ENVELOPE ============ -->
+  <section class="phase" id="phase6">
+    <div class="glass tender">
+      <p class="eyebrow">A gift for to my Queen</p>
+      <h2>A little something for you</h2>
+      <div class="flourish" aria-hidden="true">
+        <svg width="120" height="14" viewBox="0 0 120 14"><line x1="0" y1="7" x2="48" y2="7" stroke="currentColor" stroke-width="1"/><rect x="54" y="3" width="8" height="8" transform="rotate(45 58 7)" fill="currentColor"/><line x1="72" y1="7" x2="120" y2="7" stroke="currentColor" stroke-width="1"/></svg>
+      </div>
+
+      <img class="bouquet-image" src="images/man.png" alt="Bouquet photo" />
+
+      <p>And a letter, sealed with everything I feel for you.</p>
+      <div class="envelope" id="envelope">
+        <div class="env-body">
+          <img class="envelope-eyes" src="images/eyes.jpeg" alt="A close-up of your eyes">
+        </div>
+        <div class="seal">💌</div>
+        <div class="env-flap"></div>
+      </div>
+      <div class="env-hint" id="envHint">tap gently to unseal my heart</div>
+      <button class="tap-continue" id="toPhase7"><span>tap to continue</span><span class="chev">›</span></button>
+    </div>
+  </section>
+
+  <!-- ============ PHASE 7 : FLOATING LANTERNS ============ -->
+  <section class="phase" id="phase7">
+    <div class="glass night">
+      <p class="eyebrow">A gift for to my Queen</p>
+      <h2>Wait Wait... Letter kanna mundu why you deserve this ani telsukovali ledha?</h2>
+      <h2>A lantern for every reason you deserve my bujjulu 💕</h2>
+      <div class="flourish" aria-hidden="true">
+        <svg width="120" height="14" viewBox="0 0 120 14"><line x1="0" y1="7" x2="48" y2="7" stroke="currentColor" stroke-width="1"/><rect x="54" y="3" width="8" height="8" transform="rotate(45 58 7)" fill="currentColor"/><line x1="72" y1="7" x2="120" y2="7" stroke="currentColor" stroke-width="1"/></svg>
+      </div>
+      <p>Tap the sky, and let this reason drift up among the stars.</p>
+
+      <div class="lantern-sky" id="lanternSky" role="button" tabindex="0" aria-label="Tap to release a lantern"></div>
+
+      <div class="lantern-caption" id="lanternCaption"></div>
+      <div class="star-hint" id="lanternHint">6 lanterns left to release</div>
+      <button class="tap-continue" id="toPhase8"><span>tap to continue</span><span class="chev">›</span></button>
+    </div>
+  </section>
+
+  <!-- ============ PHASE 8 : LETTER ============ -->
+  <section class="phase" id="phase8">
+    <div class="glass letter-card">
+      <!-- PLACEHOLDER: change the greeting and name below -->
+      <div class="letter-greeting">Na Bujjulu ki prema ga oka leka💌 ,</div>
+      <div class="letter-body" id="letterBody"><span class="cursor"></span></div>
+      <!-- PLACEHOLDER: change the sign-off name below -->
+      <div class="letter-sign" id="letterSign" style="opacity:0;">Itlu,<br>-Nee Andhaniki Baanisa 💕</div>
+
+      <div class="hug-row" style="margin-top:22px;">
+        <button class="btn" id="hugBtn">Send a Hug 🤗</button>
+        <button class="btn ghost" id="galleryBtn">Our Memories 📷</button>
+        <button class="btn ghost" id="restartBtn">Start Again</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="modal-overlay" id="galleryModal">
+  <div class="glass modal">
+    <h2>Our Memories</h2>
+    <p>A few of my favorite moments with you.</p>
+    <div class="gallery-grid" id="galleryGrid"></div>
+    <!-- PLACEHOLDER: photo-slot divs above get their images from CSS .photo-slot
+         background — see the comment near .photo-slot in styles.css -->
+    <button class="btn ghost" id="closeGallery">Close</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
